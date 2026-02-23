@@ -148,6 +148,10 @@ function draw() {
   // --- game state ---
   player.update(level);
 
+  for (const sym of level.symbols) {
+    sym.update(cam.x, cam.y, VIEW_W, VIEW_H);
+  }
+
   // Fall death → respawn
   if (player.y - player.r > level.deathY) {
     loadLevel(levelIndex);
@@ -167,6 +171,9 @@ function draw() {
   // --- world (camera space) ---
   cam.begin();
   level.drawWorld();
+  for (const sym of level.symbols) {
+    sym.draw();
+  }
   player.draw(level.theme.blob);
   cam.end();
 
@@ -196,6 +203,14 @@ function draw() {
     10,
     72,
   );
+}
+
+function mousePressed() {
+  const worldMX = mouseX + cam.x;
+  const worldMY = mouseY + cam.y;
+  for (const sym of level.symbols) {
+    if (sym.tryClick(worldMX, worldMY)) break;
+  }
 }
 
 function keyPressed() {

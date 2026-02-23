@@ -26,6 +26,11 @@ class WorldLevel {
     this.platforms = (levelJson.platforms ?? []).map(
       (p) => new Platform(p.x, p.y, p.w, p.h),
     );
+
+    // Hidden symbols
+    this.symbols = (levelJson.symbols ?? []).map(
+      (s) => new HiddenSymbol(s.x, s.y, s.label),
+    );
   }
 
 drawWorld() {

@@ -28,6 +28,14 @@
 
         { "x": 1200, "y": 424, "w": 520, "h": 36 },
         { "x": 1400, "y": 344, "w": 140, "h": 12 }
+      ],
+      "symbols": [
+        { "x": 55,   "y": 400, "label": "stillness" },
+        { "x": 585,  "y": 130, "label": "wonder" },
+        { "x": 680,  "y": 350, "label": "courage" },
+        { "x": 850,  "y": 280, "label": "patience" },
+        { "x": 1150, "y": 230, "label": "solitude" },
+        { "x": 1650, "y": 400, "label": "presence" }
       ]
     }
   ]
