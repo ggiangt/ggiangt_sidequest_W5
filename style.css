@@ -13,3 +13,26 @@ canvas {
   display: block;
   box-shadow: 0 0 80px rgba(0, 0, 0, 0.6);
 }
+
+#game-wrap {
+  position: relative;
+}
+
+#discovery-counter {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(255, 252, 240, 0.55);
+  letter-spacing: 0.4px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.8s ease;
+  z-index: 1;
+}
+
+#discovery-counter.visible {
+  opacity: 1;
+}

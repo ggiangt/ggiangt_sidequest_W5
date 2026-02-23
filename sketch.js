@@ -45,6 +45,8 @@ const HILL_LAYERS = [
 ];
 
 let _sky; // cached sky colours for the current frame
+
+let _discoveryEl; // DOM overlay for symbol counter
 // ─────────────────────────────────────────────────────
 
 function preload() {
@@ -52,10 +54,11 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(VIEW_W, VIEW_H);
+  createCanvas(VIEW_W, VIEW_H).parent("game-wrap");
   textFont("sans-serif");
   textSize(14);
 
+  _discoveryEl = select("#discovery-counter");
   cam = new Camera2D(width, height);
   loadLevel(levelIndex);
 }
@@ -69,6 +72,21 @@ function loadLevel(i) {
   cam.x = player.x - width / 2;
   cam.y = 0;
   cam.clampToWorld(level.w, level.h);
+  updateDiscoveryCounter();
+}
+
+// ── Discovery counter ───────────────────────────────
+
+function updateDiscoveryCounter() {
+  if (!_discoveryEl) return;
+  const found = level.symbols.filter(s => s.discovered).length;
+  const total = level.symbols.length;
+  _discoveryEl.html(`&#10022; ${found} / ${total} found`);
+  if (found > 0) {
+    _discoveryEl.addClass("visible");
+  } else {
+    _discoveryEl.removeClass("visible");
+  }
 }
 
 // ── Atmosphere helpers ──────────────────────────────
@@ -209,7 +227,10 @@ function mousePressed() {
   const worldMX = mouseX + cam.x;
   const worldMY = mouseY + cam.y;
   for (const sym of level.symbols) {
-    if (sym.tryClick(worldMX, worldMY)) break;
+    if (sym.tryClick(worldMX, worldMY)) {
+      updateDiscoveryCounter();
+      break;
+    }
   }
 }
 
