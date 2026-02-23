@@ -29,7 +29,6 @@ class WorldLevel {
   }
 
 drawWorld() {
-  background(this.theme.bg);
   push();
   rectMode(CORNER);          // critical: undo any global rectMode(CENTER) [web:230]
   noStroke();
